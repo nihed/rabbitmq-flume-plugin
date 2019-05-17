@@ -5,7 +5,7 @@ there are other Flume(ng) plugins that do this as well, this implementation aims
 to be highly performant and provide tools for mapping message properties to Flume
 event headers.
 
-This plugin was developed and tested against Flume 1.5.0.
+This plugin was developed and tested against Flume 1.8.0.
 
 [![Build Status](https://travis-ci.org/aweber/rabbitmq-flume-plugin.svg?branch=master)](https://travis-ci.org/aweber/rabbitmq-flume-plugin)
 

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeoutException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -153,6 +154,8 @@ public class RabbitMQSource extends AbstractSource implements Configurable, Even
             connection = factory.newConnection();
             connection.close();
         } catch (IOException ex) {
+            throw new IllegalArgumentException("Could not connect to RabbitMQ: " + ex.toString());
+        } catch (TimeoutException ex) {
             throw new IllegalArgumentException("Could not connect to RabbitMQ: " + ex.toString());
         }
     }

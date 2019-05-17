@@ -14,6 +14,7 @@ import org.apache.flume.conf.Configurable;
 import org.apache.flume.sink.AbstractSink;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.concurrent.TimeoutException;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
@@ -168,7 +169,9 @@ public class RabbitMQSink extends AbstractSink implements Configurable {
                 rmqChannel.close();
             } catch (IOException ex) {
                 logger.error("Could not close the RabbitMQ Channel: {}", ex.toString());
-            }
+            } catch (TimeoutException ex) {
+                logger.error("Could not close the RabbitMQ Channel: {}", ex.toString());
+            } 
         }
         if (connection != null) {
             try {
@@ -215,6 +218,9 @@ public class RabbitMQSink extends AbstractSink implements Configurable {
         try {
             return factory.newConnection();
         } catch (IOException ex) {
+            counterGroup.incrementAndGet(RABBITMQ_EXCEPTION_CONNECTION);
+            throw new EventDeliveryException(ex.toString());
+        } catch (TimeoutException ex) {
             counterGroup.incrementAndGet(RABBITMQ_EXCEPTION_CONNECTION);
             throw new EventDeliveryException(ex.toString());
         }

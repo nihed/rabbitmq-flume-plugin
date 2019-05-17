@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.concurrent.TimeoutException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
@@ -29,9 +30,9 @@ public class TestRabbitMQSource {
     }
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws IOException, TimeoutException {
         ConnectionFactory mock = createNiceMock(ConnectionFactory.class);
-        expect(mock.newConnection()).andReturn(createNiceMock(Connection.class));
+        expect(mock.newConnection()).andReturn((Connection) createNiceMock(Connection.class));
         replay(mock);
         source = new RabbitMQSource(mock);
 

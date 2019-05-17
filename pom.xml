@@ -12,10 +12,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <flume.version>1.6.0</flume.version>
+    <flume.version>1.8.0</flume.version>
     <junit.version>4.11</junit.version>
-    <powermock.version>1.6.0</powermock.version>
-    <rabbitmq.version>3.4.2</rabbitmq.version>
+    <powermock.version>2.0.2</powermock.version>
+    <rabbitmq.version>5.7.0</rabbitmq.version>
     <lyra.version>0.5.2</lyra.version>
   </properties>
 
@@ -61,7 +61,7 @@
     <dependency>
       <groupId>org.easymock</groupId>
       <artifactId>easymock</artifactId>
-      <version>3.3</version>
+      <version>4.0.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>

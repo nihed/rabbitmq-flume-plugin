@@ -22,6 +22,7 @@ import org.apache.flume.FlumeException;
 import org.apache.flume.channel.ChannelProcessor;
 import org.apache.flume.event.EventBuilder;
 import org.apache.flume.instrumentation.SourceCounter;
+import java.util.concurrent.TimeoutException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -328,6 +329,8 @@ public class Consumer implements Runnable {
             channel.close();
             connection.close();
         } catch (IOException ex) {
+            logger.error("Error cleanly closing RabbitMQ connection: {}", ex.toString());
+        } catch (TimeoutException ex) {
             logger.error("Error cleanly closing RabbitMQ connection: {}", ex.toString());
         }
     }
